@@ -48,7 +48,7 @@
           class="text-lg md:text-xl mb-6"
           in:fly={{ y: 50, duration: 500, delay: 200 }}
         >
-          Discover your favorite cocktails, glasses, ingredients and more
+          Discover your favorite movies, TV shows, actors and more!
         </p>
         <button
           class="px-6 py-3 bg-tertiary hover:bg-primary transition-colors duration-150 text-white font-semibold rounded-lg"

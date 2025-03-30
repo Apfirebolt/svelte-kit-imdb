@@ -45,6 +45,7 @@
 		"aos": "^2.3.4",
 		"axios": "^1.8.4",
 		"bcrypt": "^5.1.1",
+		"js-cookie": "^3.0.5",
 		"jsonwebtoken": "^9.0.2",
 		"mongoose": "^8.13.1",
 		"svelte-carousel": "^1.0.25"

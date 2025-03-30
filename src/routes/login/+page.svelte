@@ -5,29 +5,51 @@
   import Loader from "$lib/components/Loader.svelte";
   import { isLoading } from "$lib/store";
   import Icon from "@iconify/svelte";
+  import Cookie from "js-cookie";
 
   let email = "";
   let password = "";
+  let error: string | null = null;
+  let message: string | null = null;
 
-  const login = async () => {
+  async function login() {
+    isLoading.set(true); // Set loading state to true
     try {
-      isLoading.set(true);
-      // Simulate an API call for login
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Mock delay
-      isLoading.set(false);
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
 
-      // Mock login validation
-      if (email === "user@example.com" && password === "password") {
-        alert("Login successful!");
-        goto("/dashboard"); // Redirect to a dashboard or home page
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        message = result.message;
+        email = "";
+        password = ""; // Clear form fields
+        message = "Login successful!"; // Show success message
+        Cookie.set("user", JSON.stringify(result.user), { expires: 7 }); // Set user cookie for 7 days
+        setTimeout(() => {
+          goto("/"); // Redirect to home page after 2 seconds
+        }, 2000);
       } else {
-        alert("Invalid email or password.");
+        error = result.error || "An unexpected error occurred.";
       }
-    } catch (error) {
-      console.error("Login error:", error);
-      isLoading.set(false);
+    } catch (err) {
+      console.error("Error creating user:", err);
+      if (err instanceof Response && err.status === 401) {
+        error = "Unauthorized: Invalid credentials.";
+        message = null; // Clear message on error
+      } else {
+        error = "Failed to connect to the server.";
+        message = null; // Clear message on error
+      }
+    } finally {
+      isLoading.set(false); // Set loading state to false
     }
-  };
+  }
 </script>
 
 <svelte:head>
@@ -45,13 +67,18 @@
     class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black bg-opacity-50 flex items-center justify-center"
   >
     <div class="w-1/2 mx-auto">
-      <div class="bg-white p-6 rounded-lg lg:w-1/2 shadow-lg mx-auto" in:fly={{ x: -200, duration: 500 }}>
-        <h1
-        class="text-center md:text-4xl font-bold mb-4"
+      <div
+        class="bg-white p-6 rounded-lg lg:w-1/2 shadow-lg mx-auto"
+        in:fly={{ x: -200, duration: 500 }}
       >
-        Login
-      </h1>
+        <h1 class="text-center md:text-4xl font-bold mb-4">Login</h1>
         <div class="mb-4">
+          {#if error}
+            <div class="text-white bg-secondary p-2 text-sm mb-2">{error}</div>
+          {/if}
+          {#if message}
+            <div class="text-white bg-tertiary p-2 text-sm mb-2">{message}</div>
+          {/if}
           <label for="email" class="block text-sm font-medium text-gray-700">
             Email
           </label>

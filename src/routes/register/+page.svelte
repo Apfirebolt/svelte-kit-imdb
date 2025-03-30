@@ -9,26 +9,38 @@
   let name = "";
   let email = "";
   let password = "";
+  let error: string | null = null;
+  let message: string | null = null;
 
-  const register = async () => {
+  async function register() {
+    isLoading.set(true); // Set loading state to true
     try {
-      isLoading.set(true);
-      // Simulate an API call for registration
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Mock delay
-      isLoading.set(false);
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
 
-      // Mock registration validation
-      if (name && email && password) {
-        alert("Registration successful!");
-        goto("/dashboard"); // Redirect to a dashboard or home page
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        message = result.message;
+        name = '';
+        email = '';
+        password = ''; // Clear form fields
+        goto('/login'); // Redirect to login page
       } else {
-        alert("Please fill in all fields.");
+        error = result.error || 'An unexpected error occurred.';
       }
-    } catch (error) {
-      console.error("Registration error:", error);
-      isLoading.set(false);
+    } catch (err) {
+      console.error('Error creating user:', err);
+      error = 'Failed to connect to the server.';
+    } finally {
+      isLoading.set(false); // Set loading state to false
     }
-  };
+  }
 </script>
 
 <svelte:head>
@@ -74,6 +86,12 @@
         </div>
 
         <div class="mb-4">
+          {#if error}
+            <div class="text-white bg-secondary p-2 text-sm mb-2">{error}</div>
+          {/if}
+          {#if message}
+            <div class="text-white bg-tertiary p-2 text-sm mb-2">{message}</div>
+          {/if}
           <label for="email" class="block text-sm font-medium text-gray-700">
             Email
           </label>
