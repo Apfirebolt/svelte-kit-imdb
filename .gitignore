@@ -1,0 +1,32 @@
+# Dependencies
+/node_modules/
+/.pnp/
+/.pnp.js
+
+# SvelteKit build output
+/.svelte-kit/
+/build/
+
+# Static files
+/static/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.*.local
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# System files
+.DS_Store
+Thumbs.db
