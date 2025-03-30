@@ -1,7 +1,7 @@
 <script lang="ts">
   import { fly } from "svelte/transition";
   import httpClient from "$lib/plugins/interceptor";
-  import { isLoading, movie, movies } from "$lib/store";
+  import { isLoading, movies } from "$lib/store";
   import { goto } from "$app/navigation";
   import HeaderComponent from "$lib/components/Header.svelte";
   import type { Movies } from "$lib/types/Movie";
@@ -28,7 +28,7 @@
     try {
       isLoading.set(true);
       const response = await httpClient.get<Movies>(
-        `http://www.omdbapi.com/?s=${searchQuery}&apikey=305a3406`
+        `http://www.omdbapi.com/?s=${searchQuery}&apikey=`
       );
       if (response.status === 200 && response.data) {
         movies.set(response.data.Search || []);
@@ -60,7 +60,7 @@
 
 <section
   class="relative bg-cover bg-center h-[500px]"
-  style="background-image: url('https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg');"
+  style="background-image: url('https://heroichollywood.com/wp-content/uploads/2019/03/Avengers-Endgame-Marvel-Studios-MCU-Captain-Marvel.jpg');"
 >
   <div
     class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black bg-opacity-50 flex items-center justify-center"

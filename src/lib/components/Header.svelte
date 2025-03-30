@@ -35,10 +35,10 @@
             <a
               href={item.url}
               data-sveltekit-prefetch
-              class="py-2 px-4 border-2 rounded transition-all duration-300 ease-in-out group-hover:bg-bermuda group-hover:scale-105 {selectedUrl ===
+              class="py-2 px-4 border-2 rounded-full transition-all duration-300 ease-in-out group-hover:bg-bermuda group-hover:scale-105 group-hover:shadow-lg mx-2 {selectedUrl ===
               item.url
-                ? 'bg-accent text-black'
-                : 'text-white'}"
+              ? 'bg-accent text-black'
+              : 'text-white'}"
               on:click={() => selectMenuItem(item.url)}
             >
               {item.name}
@@ -51,7 +51,7 @@
 
   <!-- Mobile Menu -->
   <div
-    class="fixed top-0 right-0 bg-midnight text-white z-50 h-full w-1/2 transform transition-transform duration-300 ease-in-out"
+    class="fixed top-0 right-0 bg-primary text-white z-50 h-full w-1/2 transform transition-transform duration-300 ease-in-out"
     class:translate-x-0={isMenuOpen}
     class:translate-x-full={!isMenuOpen}
   >

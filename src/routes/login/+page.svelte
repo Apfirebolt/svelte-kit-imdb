@@ -39,7 +39,7 @@
 
 <section
   class="relative bg-cover bg-center h-[500px]"
-  style="background-image: url('https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg');"
+  style="background-image: url('https://musicart.xboxlive.com/7/13f75000-0000-0000-0000-000000000002/504/image.jpg');"
 >
   <div
     class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black bg-opacity-50 flex items-center justify-center"

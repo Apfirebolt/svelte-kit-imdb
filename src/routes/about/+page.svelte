@@ -28,11 +28,11 @@
     />
   </svelte:head>
   
-  <HeaderComponent title="About Svelte Cocktails" />
+  <HeaderComponent title="About Svelte Movies" />
   
   <section
     class="relative bg-cover bg-center h-[500px]"
-    style="background-image: url('https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg');"
+    style="background-image: url('https://heroichollywood.com/wp-content/uploads/2019/03/Avengers-Endgame-Marvel-Studios-MCU-Captain-Marvel.jpg');"
   >
     <div
       class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black bg-opacity-50 flex items-center justify-center"
