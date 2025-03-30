@@ -28,7 +28,7 @@
     try {
       isLoading.set(true);
       const response = await httpClient.get<Movies>(
-        `http://www.omdbapi.com/?s=${searchQuery}&apikey=`
+        `http://www.omdbapi.com/?s=${searchQuery}&apikey=305a3406`
       );
       if (response.status === 200 && response.data) {
         movies.set(response.data.Search || []);

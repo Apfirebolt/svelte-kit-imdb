@@ -1,11 +1,6 @@
 <script lang="ts">
   import Icon from "@iconify/svelte";
-  let menuItems = [
-    { name: "Home", url: "/" },
-    { name: "About", url: "/about" },
-    { name: "Contact", url: "/contact" },
-    { name: "Filter", url: "/filters" },
-  ];
+  import { menuItems } from "$lib/types/Menu";
   export let title: string = "Svelte Kit Cocktails";
   let isMenuOpen = false;
   let selectedUrl = "/"; // Track the currently selected URL
@@ -56,7 +51,7 @@
 
   <!-- Mobile Menu -->
   <div
-    class="fixed top-0 right-0 bg-midnight text-white z-40 h-full w-1/2 transform transition-transform duration-300 ease-in-out"
+    class="fixed top-0 right-0 bg-midnight text-white z-50 h-full w-1/2 transform transition-transform duration-300 ease-in-out"
     class:translate-x-0={isMenuOpen}
     class:translate-x-full={!isMenuOpen}
   >
@@ -77,7 +72,7 @@
           <a
             href={item.url}
             data-sveltekit-prefetch
-            class={selectedUrl === item.url ? "bg-amber-500 text-black" : ""}
+            class={selectedUrl === item.url ? "text-black" : ""}
             on:click={() => selectMenuItem(item.url)}
           >
             {item.name}
