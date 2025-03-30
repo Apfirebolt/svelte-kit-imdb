@@ -28,7 +28,6 @@
   // check if user is logged in
   onMount(() => {
     const userData = Cookie.get("user");
-    console.log("User cookie:", userData);
     if (userData) {
       try {
         user = JSON.parse(userData);
