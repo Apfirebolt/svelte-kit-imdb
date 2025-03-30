@@ -2,6 +2,7 @@
   import { fly } from "svelte/transition";
   import httpClient from "$lib/plugins/interceptor";
   import { isLoading, movie, movies } from "$lib/store";
+  import { goto } from "$app/navigation";
   import HeaderComponent from "$lib/components/Header.svelte";
   import type { Movies } from "$lib/types/Movie";
   import Loader from "$lib/components/Loader.svelte";
@@ -13,15 +14,15 @@
 
   // Typewriter effect logic
   const typeWriter = () => {
-      if (index < text.length) {
-        displayedText += text[index];
-        index++;
-        setTimeout(typeWriter, 100); // Adjust speed here
-      }
-    };
-  
-    // Start the typewriter effect when the component is mounted
-    typeWriter();
+    if (index < text.length) {
+      displayedText += text[index];
+      index++;
+      setTimeout(typeWriter, 100); // Adjust speed here
+    }
+  };
+
+  // Start the typewriter effect when the component is mounted
+  typeWriter();
 
   const searchMovie = async () => {
     try {
@@ -42,6 +43,11 @@
       movies.set([]);
       isLoading.set(false);
     }
+  };
+
+  const goToMovieDetails = (movieId: string) => {
+    // Use Svelte's goto function for navigation
+    goto(`/movies/${movieId}`);
   };
 </script>
 
@@ -123,6 +129,14 @@
           />
           <h3 class="text-lg font-semibold mt-4">{movie?.Title}</h3>
           <p class="text-sm text-gray-600 mt-2">{movie?.Year}</p>
+          <button
+            type="button"
+            class="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-secondary transition-colors duration-150"
+            on:click={() => goToMovieDetails(movie?.imdbID)}
+            aria-label="View movie details"
+          >
+            View Details
+          </button>
         </div>
       {/each}
     </div>
