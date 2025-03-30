@@ -1,4 +1,4 @@
-# Cocktails DB in Svelte
+# SvelteKit IMDB 
 
 [![SvelteKit](https://img.shields.io/badge/-SvelteKit-ff3e00?style=flat-square&logo=svelte&logoColor=white)](https://kit.svelte.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/-Tailwind%20CSS-38b2ac?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
@@ -6,44 +6,45 @@
 [![Nginx](https://img.shields.io/badge/-Nginx-269539?style=flat-square&logo=nginx&logoColor=white)](https://nginx.org/)
 [![Vite](https://img.shields.io/badge/-Vite-646cff?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
 
-I had just completed a course on Svelte and wanted to create a basic app to test things I learned. This app is pretty much the result of it. It uses this popular API which gets all the cocktails around the world. You can filter it based on category, class, is alcoholic or not and more.
+![Cover Image](screenshots/3.png)
 
-Update : This has been ported to Sveltekit at the time of writing this since I was facing issues with routing with newer versions of Svelte. I enjoyed working with Sveltekit and used it for more projects which you can find on my profile.
+Another Svelte app I worked on recently. This app uses OMDB API to get movie data. You can search for movies and view details like plot, year of release, actors, critic score, box office collection and more. Back-end APIs are also written in Svelte using MongoDB as database and Mongoose.
 
 ## Screenshots
 
-Let's jump straight into screenshot to see how it looks like first :) Recently, it was upgraded from using Svelte to Svelte-Kit. I had issues with routing in Svelte app.
+Let's jump straight into screenshot to see how it looks like first :) 
 
 ![Screenshot 1](screenshots/1.png)
 ![Screenshot 2](screenshots/2.png)
-![Screenshot 3](screenshots/3.png)
-![Screenshot 4](screenshots/4.png)
-![Screenshot 5](screenshots/5.png)
 
 ## Features
 
-- Contains Homepage, a nested page to get random cocktail of the day, Cocktails page and a list page which has list of glass, categories and ingredients.
+- Search for movies by title using the OMDB API.
+- View detailed information about a movie, including plot, release year, actors, critic scores, and box office collection.
+- Create and manage personalized playlists of your favorite movies.
+- Responsive design for seamless usage across devices.
+- Backend APIs built with Svelte and MongoDB for efficient data handling.
+- Dockerized setup for easy deployment and scalability.
+- Optimized performance with Vite and Tailwind CSS integration.
+- Nginx support for serving the application in production.
 
-- Can filter by first letter of the cocktail and ingredients. More filters can be added in future
+## Development
 
-## Deployment
-
-Inside the project you can find Dockerfile and Nginx conf file for deploying this application on any VPS using Docker. The build folder can also be directly deployed on websites like Vercel. Please follow the following steps to deploy on VPS using Docker.
-
-1. Build the image from the given Dockerfile, give it a intuitive name 'anime-dashboard'.
-
-```
-docker build -t svelte-cocktail . 
-```
-
-2. Run the Docker container on port 4200 which is the default port used by Angular Applications.
+You can run this by installing npm packages on your system. Make sure you have MongoDB running on your system. Create an env file with the following contents
 
 ```
-docker run -p 4200:80 --name cocktail svelte-cocktail
+DB_URI=mongodb://localhost:27017/svelte_imdb
+JWT_SECRET=somesupersecret
+NEXT_PUBLIC_API_BASE_URL=http://localhost:3000
+NEXT_PUBLIC_API_KEY=your_api_key_here
 ```
 
-## Notes
+You can get the API key from this website https://www.omdbapi.com
 
-I had fun while creating this app, might as well become my favorite JS framework at least for the time being. Looking forward to create more projects using it as well as giving SvelteKit a try. 😄
+## Issues
+
+- Not able to read env variables on front-end
+- Authentication not working properly
+
 
 
