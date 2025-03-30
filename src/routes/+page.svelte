@@ -6,8 +6,22 @@
   import type { Movies } from "$lib/types/Movie";
   import Loader from "$lib/components/Loader.svelte";
   import Icon from "@iconify/svelte";
-  let displayedText = "Welcome to Svelte Cocktails";
+  let displayedText = "";
   let searchQuery = "";
+  let index = 0;
+  const text = "Welcome to Svelte Movies";
+
+  // Typewriter effect logic
+  const typeWriter = () => {
+      if (index < text.length) {
+        displayedText += text[index];
+        index++;
+        setTimeout(typeWriter, 100); // Adjust speed here
+      }
+    };
+  
+    // Start the typewriter effect when the component is mounted
+    typeWriter();
 
   const searchMovie = async () => {
     try {
@@ -105,7 +119,7 @@
           <img
             src={movie?.Poster}
             alt={movie?.Title}
-            class="w-full h-48 object-cover rounded-t-lg"
+            class="w-full h-64 rounded-t-lg"
           />
           <h3 class="text-lg font-semibold mt-4">{movie?.Title}</h3>
           <p class="text-sm text-gray-600 mt-2">{movie?.Year}</p>

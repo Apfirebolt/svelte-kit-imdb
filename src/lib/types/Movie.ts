@@ -26,7 +26,7 @@ export type Movie = {
     imdbVotes: string;
 };
 
-type MovieDetails = {
+export type MovieDetails = {
     Title: string;
     Year: string;
     imdbID: string;
